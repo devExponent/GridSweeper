@@ -1,7 +1,3 @@
-// ============================================================
-// components/KeyboardLegend.tsx — Compact shortcut hint strip
-// ============================================================
-
 import React from "react";
 
 const shortcuts = [

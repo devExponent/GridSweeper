@@ -1,7 +1,3 @@
-// ============================================================
-// components/Header.tsx — Game HUD: mines left, timer, restart
-// ============================================================
-
 import React from "react";
 import type { GameStats, GameStatus } from "../types/game";
 import { formatTime } from "../hooks/useTimer";
@@ -25,8 +21,7 @@ const Header: React.FC<HeaderProps> = ({
   onToggleSound,
   onGoToMenu,
 }) => {
-  const statusEmoji =
-    status === "won" ? "🏆" : status === "lost" ? "💀" : "😤";
+  const statusEmoji = status === "won" ? "🏆" : status === "lost" ? "💀" : "😤";
 
   return (
     <div
@@ -34,10 +29,8 @@ const Header: React.FC<HeaderProps> = ({
                  bg-slate-900/80 backdrop-blur-sm border border-slate-700/50
                  rounded-xl shadow-lg mb-3"
     >
-      {/* ── Mines left ─────────────────────────────────────── */}
       <StatBadge icon="💣" value={Math.max(0, minesLeft)} label="mines" />
 
-      {/* ── Center: status + restart ───────────────────────── */}
       <div className="flex flex-col items-center gap-1">
         <button
           onClick={onRestart}
@@ -52,9 +45,12 @@ const Header: React.FC<HeaderProps> = ({
         </button>
       </div>
 
-      {/* ── Right: timer + sound toggle ───────────────────── */}
       <div className="flex items-center gap-3">
-        <StatBadge icon="⏱" value={formatTime(stats.timeElapsed)} label="time" />
+        <StatBadge
+          icon="⏱"
+          value={formatTime(stats.timeElapsed)}
+          label="time"
+        />
         <button
           onClick={onToggleSound}
           title={isSoundOn ? "Mute sound" : "Enable sound"}
@@ -80,7 +76,6 @@ const Header: React.FC<HeaderProps> = ({
   );
 };
 
-// ── Small stat badge ──────────────────────────────────────
 interface StatBadgeProps {
   icon: string;
   value: string | number;

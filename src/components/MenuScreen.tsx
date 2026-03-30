@@ -1,7 +1,3 @@
-// ============================================================
-// components/MenuScreen.tsx — Welcome screen shown at start
-// ============================================================
-
 import React from "react";
 
 interface MenuScreenProps {
@@ -11,11 +7,10 @@ interface MenuScreenProps {
 const MenuScreen: React.FC<MenuScreenProps> = ({ onStart }) => {
   return (
     <div className="flex flex-col items-center gap-8 py-6 animate-fade-in">
-      {/* Logo */}
       <div className="flex flex-col items-center gap-2">
         <div className="relative">
           <span className="text-7xl leading-none select-none">💣</span>
-          {/* Glow */}
+
           <span className="absolute inset-0 text-7xl leading-none blur-xl opacity-40 select-none">
             💣
           </span>
@@ -28,7 +23,6 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ onStart }) => {
         </p>
       </div>
 
-      {/* How to play */}
       <div className="w-full max-w-xs bg-slate-800/60 rounded-xl border border-slate-700/50 p-5 space-y-2.5">
         <h2 className="text-slate-300 text-xs font-bold uppercase tracking-widest mb-3">
           How to Play
@@ -50,7 +44,6 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ onStart }) => {
         ))}
       </div>
 
-      {/* Start button */}
       <button
         onClick={onStart}
         className="px-10 py-3.5 bg-amber-500 hover:bg-amber-400 active:scale-95
@@ -61,9 +54,7 @@ const MenuScreen: React.FC<MenuScreenProps> = ({ onStart }) => {
         Start Game
       </button>
 
-      <p className="text-slate-600 text-xs">
-        Clear all safe cells to win
-      </p>
+      <p className="text-slate-600 text-xs">Clear all safe cells to win</p>
     </div>
   );
 };

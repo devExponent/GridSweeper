@@ -1,6 +1,4 @@
-// ============================================================
-// hooks/useKeyboard.ts — Keyboard shortcut & navigation hook
-// ============================================================
+
 
 import { useEffect, useState } from "react";
 import type { GameStatus, Position } from "../types/game";
@@ -68,7 +66,7 @@ export function useKeyboard({
 
         case "enter":
         case " ":
-          // Only act when game is active
+          
           if (status === "playing" || status === "menu") {
             e.preventDefault();
             onReveal(focusedCell.row, focusedCell.col);

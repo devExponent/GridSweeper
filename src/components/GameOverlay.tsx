@@ -1,7 +1,3 @@
-// ============================================================
-// components/GameOverlay.tsx — Win / Lose result modal
-// ============================================================
-
 import React from "react";
 import type { GameStats, GameStatus } from "../types/game";
 import { formatTime } from "../hooks/useTimer";
@@ -24,12 +20,10 @@ const GameOverlay: React.FC<GameOverlayProps> = ({
   const isWin = status === "won";
 
   return (
-    // Backdrop
     <div
       className="absolute inset-0 z-20 flex items-center justify-center
                  bg-black/60 backdrop-blur-sm rounded-2xl animate-fade-in"
     >
-      {/* Card */}
       <div
         className={`relative flex flex-col items-center gap-5 px-8 py-7 rounded-2xl
           border shadow-2xl animate-slide-up
@@ -39,16 +33,13 @@ const GameOverlay: React.FC<GameOverlayProps> = ({
               : "bg-red-950/95 border-red-600/60 shadow-red-900/50"
           }`}
       >
-        {/* Glow ring */}
         <div
           className={`absolute -inset-px rounded-2xl opacity-40 blur-sm pointer-events-none
             ${isWin ? "bg-emerald-500" : "bg-red-500"}`}
         />
 
-        {/* Icon */}
         <span className="text-6xl leading-none">{isWin ? "🏆" : "💥"}</span>
 
-        {/* Title */}
         <div className="text-center">
           <h2
             className={`text-2xl font-extrabold tracking-tight ${
@@ -64,13 +55,15 @@ const GameOverlay: React.FC<GameOverlayProps> = ({
           </p>
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-2 gap-3 w-full">
-          <StatCard icon="⏱" label="Time" value={formatTime(stats.timeElapsed)} />
+          <StatCard
+            icon="⏱"
+            label="Time"
+            value={formatTime(stats.timeElapsed)}
+          />
           <StatCard icon="👆" label="Moves" value={stats.movesCount} />
         </div>
 
-        {/* Buttons */}
         <div className="flex gap-3 w-full">
           <button
             onClick={onRestart}
@@ -100,17 +93,19 @@ const GameOverlay: React.FC<GameOverlayProps> = ({
   );
 };
 
-const StatCard: React.FC<{ icon: string; label: string; value: string | number }> = ({
-  icon,
-  label,
-  value,
-}) => (
+const StatCard: React.FC<{
+  icon: string;
+  label: string;
+  value: string | number;
+}> = ({ icon, label, value }) => (
   <div className="flex flex-col items-center gap-1 bg-slate-800/60 rounded-lg p-3 border border-slate-700/40">
     <span className="text-xl">{icon}</span>
     <span className="text-white font-mono font-bold text-lg leading-none">
       {value}
     </span>
-    <span className="text-slate-500 text-[10px] uppercase tracking-wider">{label}</span>
+    <span className="text-slate-500 text-[10px] uppercase tracking-wider">
+      {label}
+    </span>
   </div>
 );
 

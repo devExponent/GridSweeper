@@ -1,7 +1,3 @@
-// ============================================================
-// components/Cell.tsx — Single grid cell with all visual states
-// ============================================================
-
 import React, { useCallback } from "react";
 import type { Cell as CellType } from "../types/game";
 import { getNumberColor } from "../utils/cellColors";
@@ -19,7 +15,7 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
       e.preventDefault();
       onReveal(cell.row, cell.col);
     },
-    [cell.row, cell.col, onReveal]
+    [cell.row, cell.col, onReveal],
   );
 
   const handleContextMenu = useCallback(
@@ -27,7 +23,7 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
       e.preventDefault();
       onFlag(cell.row, cell.col);
     },
-    [cell.row, cell.col, onFlag]
+    [cell.row, cell.col, onFlag],
   );
 
   // ── Derive appearance ───────────────────────────────────
@@ -36,7 +32,6 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
   const isExploded = cell.state === "exploded";
   const isHidden = cell.state === "hidden";
 
-  // Animation delay based on flood-fill reveal index
   const revealDelay = `${Math.min(cell.revealIndex * 18, 600)}ms`;
 
   // ── Base classes ─────────────────────────────────────────
@@ -47,7 +42,8 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
     "rounded-[3px] ";
 
   if (isFocused) {
-    containerCls += "ring-2 ring-amber-400 ring-offset-1 ring-offset-slate-900 z-10 ";
+    containerCls +=
+      "ring-2 ring-amber-400 ring-offset-1 ring-offset-slate-900 z-10 ";
   }
 
   if (isRevealed || isExploded) {
@@ -58,13 +54,11 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
     containerCls +=
       "bg-slate-700/80 hover:bg-slate-600/80 border-slate-600/60 ";
   } else {
-    // Hidden
     containerCls +=
       "bg-slate-700/70 hover:bg-slate-600/70 active:bg-slate-500/70 " +
       "border-t-slate-600/80 border-l-slate-600/80 border-b-slate-800/80 border-r-slate-800/80 ";
   }
 
-  // ── Inner content ────────────────────────────────────────
   let content: React.ReactNode = null;
 
   if (isExploded) {
@@ -73,7 +67,9 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
     content = <span className="text-base leading-none">💣</span>;
   } else if (isRevealed && cell.adjacentMines > 0) {
     content = (
-      <span className={`${getNumberColor(cell.adjacentMines)} font-extrabold tracking-tight`}>
+      <span
+        className={`${getNumberColor(cell.adjacentMines)} font-extrabold tracking-tight`}
+      >
         {cell.adjacentMines}
       </span>
     );
@@ -88,7 +84,6 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
     );
   }
 
-  // ── Reveal shimmer overlay ────────────────────────────────
   const shimmer =
     isRevealed && !cell.isMine && !isExploded ? (
       <span
@@ -105,15 +100,13 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
       tabIndex={isFocused ? 0 : -1}
       className={containerCls}
       style={
-        isRevealed && !isExploded
-          ? { animationDelay: revealDelay }
-          : undefined
+        isRevealed && !isExploded ? { animationDelay: revealDelay } : undefined
       }
       onClick={handleClick}
       onContextMenu={handleContextMenu}
     >
       {shimmer}
-      {/* Subtle inner highlight for hidden cells */}
+
       {isHidden && (
         <span className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-[3px] pointer-events-none" />
       )}
@@ -123,9 +116,12 @@ const Cell: React.FC<CellProps> = ({ cell, isFocused, onReveal, onFlag }) => {
 };
 
 function getCellAriaLabel(cell: CellType): string {
-  if (cell.state === "flagged") return `Row ${cell.row + 1}, Col ${cell.col + 1}: Flagged`;
-  if (cell.state === "hidden") return `Row ${cell.row + 1}, Col ${cell.col + 1}: Hidden`;
-  if (cell.state === "exploded") return `Row ${cell.row + 1}, Col ${cell.col + 1}: Mine exploded`;
+  if (cell.state === "flagged")
+    return `Row ${cell.row + 1}, Col ${cell.col + 1}: Flagged`;
+  if (cell.state === "hidden")
+    return `Row ${cell.row + 1}, Col ${cell.col + 1}: Hidden`;
+  if (cell.state === "exploded")
+    return `Row ${cell.row + 1}, Col ${cell.col + 1}: Mine exploded`;
   if (cell.isMine) return `Row ${cell.row + 1}, Col ${cell.col + 1}: Mine`;
   if (cell.adjacentMines > 0)
     return `Row ${cell.row + 1}, Col ${cell.col + 1}: ${cell.adjacentMines} adjacent mines`;

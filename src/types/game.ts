@@ -1,6 +1,4 @@
-// ============================================================
-// types/game.ts — All shared TypeScript types for GridSweep
-// ============================================================
+
 
 export type CellState = "hidden" | "revealed" | "flagged" | "exploded";
 
@@ -12,7 +10,7 @@ export interface Cell {
   isMine: boolean;
   state: CellState;
   adjacentMines: number;
-  /** Stagger index for wave-reveal animation */
+  
   revealIndex: number;
 }
 

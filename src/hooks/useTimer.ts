@@ -1,6 +1,4 @@
-// ============================================================
-// hooks/useTimer.ts — Formats elapsed seconds into MM:SS
-// ============================================================
+
 
 export function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60)

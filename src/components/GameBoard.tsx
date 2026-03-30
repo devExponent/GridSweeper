@@ -27,7 +27,11 @@ const GameBoard: React.FC<GameBoardProps> = ({
       aria-label="GridSweep game board"
     >
       {board.map((row, rIdx) => (
-        <div key={rIdx} role="row" className="flex gap-[2px] mb-[2px] last:mb-0">
+        <div
+          key={rIdx}
+          role="row"
+          className="flex gap-[2px] mb-[2px] last:mb-0"
+        >
           {row.map((cell) => (
             <Cell
               key={`${cell.row}-${cell.col}`}

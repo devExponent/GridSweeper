@@ -1,12 +1,10 @@
-/* ============================================================
-   index.css — Tailwind directives + custom animations
-   ============================================================ */
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ── Custom keyframes ─────────────────────────────────────── */
+
 
 @keyframes cell-reveal {
   0%   { opacity: 1; transform: scale(1.25); }
@@ -35,7 +33,7 @@
   50%       { opacity: 1; }
 }
 
-/* ── Utility classes ──────────────────────────────────────── */
+
 
 @layer utilities {
   .animate-cell-reveal {
@@ -59,13 +57,13 @@
   }
 }
 
-/* ── Prevent context menu on game grid ───────────────────── */
+
 .no-context-menu {
   -webkit-touch-callout: none;
   user-select: none;
 }
 
-/* ── Scrollbar styling ───────────────────────────────────── */
+
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0f172a; }
 ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }

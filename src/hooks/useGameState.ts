@@ -1,6 +1,4 @@
-// ============================================================
-// hooks/useGameState.ts — Central game state & logic hook
-// ============================================================
+
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Board, GameConfig, GameStatus, GameStats } from "../types/game";
@@ -48,7 +46,7 @@ export function useGameState(config: GameConfig): UseGameStateReturn {
     flagsPlaced: 0,
   });
 
-  // Timer ref so we can clear it
+  
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const soundRef = useRef(isSoundOn);
   soundRef.current = isSoundOn;
@@ -60,7 +58,7 @@ export function useGameState(config: GameConfig): UseGameStateReturn {
     []
   );
 
-  // ── Timer ────────────────────────────────────────────────
+  
   useEffect(() => {
     if (status === "playing") {
       timerRef.current = setInterval(() => {
@@ -74,7 +72,7 @@ export function useGameState(config: GameConfig): UseGameStateReturn {
     };
   }, [status]);
 
-  // ── Reveal ────────────────────────────────────────────────
+  
   const revealCell = useCallback(
     (row: number, col: number) => {
       if (status !== "playing" && status !== "menu") return;
@@ -85,7 +83,7 @@ export function useGameState(config: GameConfig): UseGameStateReturn {
 
         let workingBoard = deepCloneBoard(prev);
 
-        // First click: place mines around safe zone
+        
         if (!isMinesPlaced) {
           workingBoard = placeMines(workingBoard, config, { row, col });
           setIsMinesPlaced(true);
@@ -93,7 +91,7 @@ export function useGameState(config: GameConfig): UseGameStateReturn {
         }
 
         if (workingBoard[row][col].isMine) {
-          // Hit a mine — game over
+          
           const explodedBoard = revealAllMines(workingBoard, { row, col });
           sound(playExplosion);
           setStatus("lost");
@@ -126,7 +124,7 @@ export function useGameState(config: GameConfig): UseGameStateReturn {
     [status, isMinesPlaced, config, sound]
   );
 
-  // ── Flag toggle ───────────────────────────────────────────
+  
   const toggleFlag = useCallback(
     (row: number, col: number) => {
       if (status !== "playing") return;
@@ -154,7 +152,7 @@ export function useGameState(config: GameConfig): UseGameStateReturn {
     [status, sound]
   );
 
-  // ── New game ──────────────────────────────────────────────
+  
   const startNewGame = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
     setBoard(createEmptyBoard(config));
